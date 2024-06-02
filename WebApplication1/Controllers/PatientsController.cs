@@ -33,7 +33,8 @@ namespace WebApplication1.Controllers
             {
                 patients = patients.Where(p => p.SName.Contains(searchString)
                                             || p.FName.Contains(searchString)
-                                            || p.MName.Contains(searchString));
+                                            || p.MName.Contains(searchString)
+                                            || p.Telephone.Contains(searchString));
             }
 
             if (startDate.HasValue)
