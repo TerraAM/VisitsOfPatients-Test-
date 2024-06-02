@@ -14,17 +14,17 @@
                     <input name="IsValid" type="hidden" value="@ViewData.ModelState.IsValid.ToString()" />
                     <div class="form-group">
                         <label asp-for="SName"></label>
-                        <input asp-for="SName" class="form-control" />
+                        <input asp-for="SName" class="form-control" pattern="[A-Za-zА-Яа-яЁё]+" title="Петров"/>
                         <span asp-validation-for="SName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="FName"></label>
-                        <input asp-for="FName" class="form-control" />
+                        <input asp-for="FName" class="form-control" pattern="[A-Za-zА-Яа-яЁё]+" title="Петр" />
                         <span asp-validation-for="FName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="MName"></label>
-                        <input asp-for="MName" class="form-control" />
+                        <input asp-for="MName" class="form-control" pattern="[A-Za-zА-Яа-яЁё]+" title="Петровович" />
                         <span asp-validation-for="MName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -34,7 +34,7 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Telephone"></label>
-                        <input asp-for="Telephone" class="form-control" />
+                        <input asp-for="Telephone" class="form-control" pattern="\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}" title="+7 (000) 000-00-00"/>
                         <span asp-validation-for="Telephone" class="text-danger"></span>
                     </div>
                 </form>
