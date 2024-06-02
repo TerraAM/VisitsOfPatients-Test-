@@ -1,0 +1,11 @@
+﻿@model IEnumerable<WebApplication1.Models.Entity.Diagnosis>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.mkb_cod)</td>
+            <td>@Html.DisplayFor(modelItem => item.mkb_name)</td>
+            <td>@Html.DisplayFor(modelItem => item.class_id)</td>
+        </tr>
+    }

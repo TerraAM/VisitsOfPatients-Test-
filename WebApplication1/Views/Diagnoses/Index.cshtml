@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebApplication1.Models.Entity.Diagnosis>
+
+@{
+    ViewData["Title"] = "Список";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Список</h1>
+
+<p>
+    <a asp-action="Update_download">Обновить/Загрузить</a>
+</p>
+
+<table class="table" id="diagnosis-table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.mkb_cod)</th>
+            <th>@Html.DisplayNameFor(model => model.mkb_name)</th>
+            <th>@Html.DisplayNameFor(model => model.class_id)</th>
+        </tr>
+    </thead>
+    <tbody id="diagnosis-body">
+        <!-- Initial data will be loaded here -->
+    </tbody>
+</table>
+
+<div id="loader" style="display: none;">Загрузка...</div>
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        var pageNumber = 1;
+        var pageSize = 25;
+
+        function loadMore() {
+            $('#loader').show();
+            $.ajax({
+                url: '@Url.Action("LoadMore", "Diagnoses")',
+                type: 'GET',
+                data: {
+                    pageNumber: pageNumber,
+                    pageSize: pageSize
+                },
+                success: function (data) {
+                    $('#diagnosis-body').append(data);
+                    $('#loader').hide();
+                },
+                error: function () {
+                    $('#loader').hide();
+                    alert("Error loading data.");
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            loadMore(); // Initial load
+
+            $(window).scroll(function () {
+                if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+                    pageNumber++;
+                    loadMore();
+                }
+            });
+        });
+    </script>
+}

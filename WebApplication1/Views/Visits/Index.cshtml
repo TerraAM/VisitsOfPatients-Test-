@@ -1,0 +1,64 @@
+﻿@model IEnumerable<WebApplication1.Models.Entity.Visits>
+
+@{
+    ViewData["Title"] = "Список";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="modal-placeholder"></div>
+
+<h1>Список</h1>
+
+<button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#add-patient" data-url="@Url.Action("Create")">
+    Добавить посещение
+</button>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Diagnosis.mkb_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Patient.SName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Patient.FName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Patient.MName)
+            </th>
+            @*<th></th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Diagnosis.mkb_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Patient.SName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Patient.FName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Patient.MName)
+                </td>
+                @*<td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Подробности</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                </td>*@
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,84 @@
+﻿@model IEnumerable<WebApplication1.Models.Entity.Patient>
+
+@{
+    ViewData["Title"] = "Список";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="modal-placeholder"></div>
+
+<h1>Список</h1>
+
+<button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#add-patient" data-url="@Url.Action("Create")">
+    Добавить пациента
+</button>
+<p></p>
+<form asp-action="Index" method="get">
+    <div class="form-group">
+        <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" class="form-control" placeholder="Поиск...">
+    </div>
+    <div class="form-group">
+        <label for="startDate">Дата рождения от:</label>
+        <input type="date" name="startDate" value="@ViewData["StartDate"]" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="endDate">Дата рождения до:</label>
+        <input type="date" name="endDate" value="@ViewData["EndDate"]" class="form-control" />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Поиск" class="btn btn-default" />
+        <a asp-action="Index" class="btn btn-default">Сбросить</a>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["SNameSortParm"]">Фамилия</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["FNameSortParm"]">Имя</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["MNameSortParm"]">Отчество</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]">Дата рождения</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["TelephoneSortParm"]">Телефон</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telephone)
+                </td>
+                <td>
+                    @*<a asp-action="Edit" asp-route-id="@item.Id">Изменить</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Подробности</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>*@
+                    <a asp-controller="Visits" asp-action="Index" asp-route-id="@item.Id">Посещения</a> |
+                    <a asp-action="ExportToXml" asp-route-id="@item.Id">XML</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
